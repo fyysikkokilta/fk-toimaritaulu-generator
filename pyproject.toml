@@ -1,0 +1,15 @@
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Aapo Laakkio", email = "aapolaakkio@outlook.com"},
+]
+dependencies = [
+    "fpdf2>=2.7.7",
+    "xhtml2pdf>=0.2.15",
+]
+requires-python = ">=3.12"
+readme = "README.md"
+license = {text = "MIT"}
+
