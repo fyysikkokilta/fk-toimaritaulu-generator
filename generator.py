@@ -22,7 +22,7 @@ def create_toimari_object(jaokset, toimarit, kuvat):
     return toimaritJaoksittain
 
 def create_html(data, default_image, cells_per_row, jaos_colors_and_order):
-    html_content = f'<div style="font-family: Source Sans Pro,Calibri,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji; padding: 0; width: fit-content;">'
+    html_content = f'<div style="font-family: Source Sans Pro,Calibri,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji; padding: 0; width: 960px;">'
     html_content += f'<div style="display: flex; flex-direction: row">'
 
     counter = 0
@@ -31,7 +31,7 @@ def create_html(data, default_image, cells_per_row, jaos_colors_and_order):
         toimihenkilot = sorted(data[jaos], key=lambda x: (x["virat"][0], x["nimi"]))
         background_color = jaos_colors_and_order.get(jaos, "lightgray")
         text_color = "black" if background_color == "#fbdb1d" else "white"
-        html_content += f'<div style="display: flex; text-align: left; justify-content: center; align-items: center; padding: 2% 1%; color: {text_color}; background-color: {background_color}; font-family: Lora,Helvetica,serif; font-style: italic"><div style="width: 160px;"><h3>{jaos}</h3></div></div>'
+        html_content += f'<div style="display: flex; text-align: left; justify-content: center; align-items: center; padding: 2% 1%; color: {text_color}; background-color: {background_color}; font-family: Lora,Helvetica,serif; font-style: italic; font-size: {18/cells_per_row*6}"><div style="width: {160/cells_per_row*6}"><h3>{jaos}</h3></div></div>'
 
         if counter % cells_per_row == cells_per_row - 1:
                 html_content += '</div><div style="display: flex; flex-direction: row">'
@@ -43,11 +43,11 @@ def create_html(data, default_image, cells_per_row, jaos_colors_and_order):
             
             # Check if the image file exists before adding the image tag
             if os.path.exists(image_path):
-                img_tag = f'<div style="min-height: 250px"><img src="{image_path}" width="160px" style="margin-bottom: 10px;"></div>'
+                img_tag = f'<div style="min-height: {250/cells_per_row*6}"><img src="{image_path}" width={160/cells_per_row*6} style="margin-bottom: 10px;"></div>'
             else:
-                img_tag = f'<div style="min-height: 250px"><img src="{default_image}" width="160px" style="margin-bottom: 10px;"></div>'
+                img_tag = f'<div style="min-height: {250/cells_per_row*6}"><img src="{default_image}" width={160/cells_per_row*6} style="margin-bottom: 10px;"></div>'
 
-            cell_html = f'<div style="display: inline-block; width: 160px; text-align: center; padding: 3.5% 1%; color: {text_color}; background-color: {background_color};">{img_tag}<br><b>{toimihenkilo["nimi"]}</b><br>{", ".join(toimihenkilo["virat"])}</div>'
+            cell_html = f'<div style="display: inline-block; width: {160/cells_per_row*6}; text-align: center; padding: 3.5% 1%; color: {text_color}; background-color: {background_color}; font-size: {18/cells_per_row*6}">{img_tag}<br><b>{toimihenkilo["nimi"]}</b><br>{", ".join(toimihenkilo["virat"])}</div>'
             
             html_content += cell_html
 
